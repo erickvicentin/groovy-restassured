@@ -1,5 +1,6 @@
 {
-  "baseUrl": "https://qa-library-dev.herokuapp.com/api",
+  "baseUrl": "https://qa-library-dev.herokuapp.com",
+  "path": "/api",
   "books": "/books",
   "articles": "/articles"
 }

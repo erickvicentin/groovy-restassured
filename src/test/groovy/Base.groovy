@@ -4,9 +4,11 @@ import io.restassured.http.ContentType
 import io.restassured.specification.RequestSpecification
 import org.testng.annotations.BeforeClass
 
+
+
 class Base {
     @BeforeClass
-    public static void setupRestAssured() {
+    static void setupRestAssured() {
         RestAssured.baseURI = "https://qa-library-dev.herokuapp.com"
         RestAssured.basePath = "/api/"
         RequestSpecification requestSpecification = new RequestSpecBuilder()
