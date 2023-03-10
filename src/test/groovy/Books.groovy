@@ -26,10 +26,29 @@ class Books extends Base {
     void createAndDeleteBookTest() {
         File bookFile = new File(getClass().getResource("/book.json").toURI())
         Response createResponse = given().body(bookFile).when().post("/books")
+
         String responseID = createResponse.jsonPath().getString("post.book_id")
+        Assert.assertEquals(createResponse.getStatusCode(), 201)
+
         Response deleteResponse = given()
                 .body("{\n"+
                         "\t\"book_id\": " + responseID + "\n" +
                       "}").when().delete("/books")
+
+        Assert.assertEquals(deleteResponse.getStatusCode(), 200)
+        Assert.assertEquals(deleteResponse.jsonPath().getString("message"), "Book successfully deleted")
+    }
+
+    @Test()
+    void deleteNonExistentBookTest() {
+        String nonExistentID = "9009"
+        Response deleteResponse = given()
+                .body("{\n"+
+                        "\t\"book_id\": " + nonExistentID + "\n" +
+                        "}").when().delete("/books")
+        Assert.assertEquals(deleteResponse.getStatusCode(), 500)
+        Assert.assertEquals(deleteResponse.jsonPath().getString("error"), "Unable to find book id: "+ nonExistentID)
+
+
     }
 }
