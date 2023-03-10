@@ -1,0 +1,5 @@
+{
+  "baseUrl": "https://qa-library-dev.herokuapp.com/api",
+  "books": "/books",
+  "articles": "/articles"
+}
